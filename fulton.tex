@@ -1,0 +1,438 @@
+\documentclass{book}
+\usepackage{amsthm,amsmath,amsfonts,amssymb,tcolorbox,enumitem}
+
+\newcommand{\I}[1]{\mathcal{I}(#1)}
+\newcommand{\V}[1]{\mathcal{V}(#1)}
+\newcommand{\kn}{k[x_1,x_2,\ldots,x_n]}
+\newcommand{\Rn}{R[x_1,x_2,\ldots,x_n]}
+\newcommand{\Af}{{\Bbb A}^n}
+\newcommand{\Ak}{{\Bbb A}_k^n}
+\newcommand{\Akn}[1]{{\Bbb A}_k^#1}
+\newcommand{\fr}[1]{\mathfrak #1}
+\newcommand{\C}{\mathbb C}
+\DeclareMathOperator{\im}{im}
+
+\theoremstyle{definition}
+\newtheorem*{lem}{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem*{thmsmall}{Theorem}
+
+\newtheoremstyle{block}
+ {\topsep}% space above
+ {\topsep}% space below
+ {}% body font
+ {}% indent
+ {\bfseries}% head font
+ {}% punctuation
+ {1em}% space between head and body
+ {(\thmnumber{#2})}
+
+\theoremstyle{block}
+\newtheorem{block}{}[section]
+\newtheorem{block*}[block]{}
+
+\newtheoremstyle{thm}
+ {\topsep}% space above
+ {\topsep}% space below
+ {}% body font
+ {0em}% indent
+ {\bfseries}% head font
+ {}% punctuation
+ {0em}% space between head and body
+ {#3. }
+
+\theoremstyle{thm}
+\newtheorem*{thm}{}
+
+\tcolorboxenvironment{block*}{
+  frame empty,
+  colback=black!15!white,
+  grow to left by=6pt,
+  grow to right by=6pt,
+  left=1.6pt,
+  right=1.6pt,
+  arc=0pt
+}
+
+\tcolorboxenvironment{thm}{
+  frame empty,
+  colback=black!15!white,
+  grow to left by=6pt,
+  grow to right by=6pt,
+  left=1.6pt,
+  right=1.6pt,
+  arc=0pt
+}
+
+\begin{document}
+
+\chapter{Affine algebraic sets}
+
+\section{The ideal of a set of points}
+\begin{block*}
+  Prove the following properties:
+  \begin{enumerate}[label=(\alph*)]
+    \item $\mathcal I$ and $\mathcal V$ reverse inclusions. 
+    \item $\I{\V S}\supset S$ for all $S\subset\kn$. Dually, $\V{\I X}\supset X$
+      for all $V\subset\Af$.
+    \item $\V{\I{\V S}}=\V S$ for $S$ a set of polynomials; $\I{\V{\I X}}=\I X$
+      for $X$ a set of points.
+\end{enumerate}
+\end{block*}
+
+\begin{enumerate}[label=(\alph*)]
+  \item 
+    If $X\supset Y$, then any $f$ vanishing on $X$ must necessarily vanish
+    on all of $Y$, so $\I X\subset\I Y$.\\
+    Similarly, if $I\supset J$, then any $x$ on which all $f\in J$ vanish must
+    also be a point where all $f\in I$ vanish, so $\V I\subset\V J$.
+  \item
+    $f\in S$ means that it vanishes at all $x\in\V S$. Now, $\I{\V S}$ is the
+    set of functions which vanish all over $\V S$, and all $f\in S$ do. Hence
+    $\I{\V S}\supset S$.\\
+    All $f\in\I X$ vanish on $X$. $\V{\I X}$ is the set of points where all $f$ vanish,
+    and they certainly do on $X$.
+  \item
+    For all sets $X$ of points in $\Af$, $\V{\I{X'}}\supset X'$. Setting $X'=\V
+    S$, we have $\I{\V{\I X}}\supset \I X$.
+    We know that $X \subset\V{\I X}$. Applying $\mathcal I$ reverses
+    inclusions, so that $\I{\V{\I X}}\subset\I X$. Together, we get that
+    $\I{\V{\I X}} = \I X$.\\
+    The argument for the other side is almost the exact dual of this, so we omit
+    it. 
+\end{enumerate}
+
+\begin{block*}$\I X$ is radical for any $X\subset\Af$ .\end{block*}
+\noindent We recall the definition of the radical of an ideal:
+\[\sqrt I = \{a\in R : a^n\in I \text{ for some n } > 0\}\]
+A radical ideal is any ideal $I$ for which $I=\sqrt I$.\\\\
+The inclusion $I\subset \sqrt I$ is trivial (just take $n=1$ in the definition).
+We prove the reverse.
+For an algebraic set $V$, $\I V$ is the set of all polynomials which vanish
+everywhere on $V$, that is:
+\[\I V:=\{f\in\kn : \forall x\in V. f(x) = 0\}\]
+Then
+\[\sqrt{\I V}=\{f\in\kn : \forall x\in V. f(x)^n = 0\text{ for some }n>0\}\]
+But if this holds for any $n$, then it holds for all $n$: in particular, it
+holds for $n=1$, so this definition reduces to the previous one.
+
+\begin{block*}Consider an algebraic set $W\subset\Af$, and $p\in\Af$ not in $W$.
+  Construct a function that is $0$ on $W$ and $1$ on $p$.\end{block*}
+$\I W\neq\I{W\cup \{p\}}$ (if not, then $p$ is in $W$). Hence, there is at least
+one polynomial, say $g$, in the latter ideal that does not belong to the former.
+The required polynomial function is $\frac{g(x)}{g(p)}$.
+\section{The Hilbert basis theorem}
+Apparently all algebraic sets are an intersection of a finite number of
+hypersurfaces. In other words, you can define an algebraic set with a finite
+number of polynomials in every case!
+\begin{thm}[The Hilbert basis theorem] If $R$ is Noetherian, then $\Rn$ is
+  Noetherian too. 
+\end{thm}
+\begin{proof}[Proof]
+  Note that $\Rn$ is canonically iso to $R[x_1,x_2,\ldots,x_{n-1}][x_n]$, so if
+  we show that $R$ Noetherian implies $R[x]$ Noetherian, then we are done by
+  induction (the base case is obviously $R$, which is Noetherian by assumption).
+  Let $I$ be an ideal of $R[x]$. We have to find a finite set of generators for
+  $I$.\\
+  Let $J$ be the set of leading coefficients of polynomials in $R[x]$. 
+\begin{lem}$J$ is an ideal of $R$.\\
+Closure under addition: if $j$ and $j'$ are two elements of $J$ corresponding to
+the polynomials $f$ and $f'$ of $R[x]$, then the leading coefficient of the
+polynomial $f+f'\in R[x]$ is $j+j'\in J$.\\
+Closure under $R$-multiplication: If $j\in J$ corresponds to $f\in R[x]$, then for all $r\in R$, $rj$ is
+the leading coefficient of $rf\in R[x]$. 
+\end{lem}
+Since $R$ is Noetherian, this implies that $J$ is finitely generated. Let the
+polynomials in $R[x]$ whose leading coefficients generate $J$ be
+$F=\{F_1,F_2,\ldots,F_r\}\subset I$, and let $N$ be an integer greater than
+$\max\deg F$.\par
+For each $m\leq N$, let $J_m$ be the ideal of $R$ consisting of the leading
+coefficients of all $F\in R[x]$ with $\deg F\leq m$. (The argument that this is
+an ideal is almost identical to that in the lemma.) Let $F_m:={F_{m_j}}_1^k$ be
+a finite generating set for $J_m$. (Again, by Noetherian-ness, this exists.)\par
+Crux move: Let $I'$ be the ideal generated by $F$ and all the $F_m$s. We claim
+$I\subseteq I'$. Since we have, in that case, constructed a finite generating set for any
+arbitrary ideal $I$, will have shown that $R[x]$ is Noetherian.\par
+Assume the contrary, i.e. that there are $G\in I$ not in
+$I'$. Choose the one with the least degree. There are then two cases:
+\begin{enumerate}[label=(\alph*)]
+  \item $\deg G > N$. We can then find some polynomials $Q_i$ such that $T =
+    \sum Q_iF_i$ has the same leading coefficient as $G$ does. Now, $T$ is an
+    element of $I'$, so $G-T\in I'$. Since $I'$ is an ideal, $G$ must also be in
+    $I'$.
+  \item $\deg G = m\leq N$, then we can lower the degree by subtracting off some
+    $\sum Q_jF_{m_j}$, and $G\in I'$ again.
+\end{enumerate}
+In both cases, we arrive at a contradiction. Thus, no such $G$ exists, and hence
+we see that $I'\supseteq I$. Since $I'$ has been shown to be finitely generated,
+$I$ is too. 
+\end{proof}
+
+\begin{cor}For all fields $k$, $\kn$ is Noetherian.\end{cor}
+\begin{thmsmall}Any algebraic set $V$ is the intersection of finitely many
+  hypersurfaces.\end{thmsmall}
+
+\begin{proof}
+  Let $V = \V I$ for some ideal $I$ of $\kn$. As an ideal of a polynomial ring over a field, it is finitely
+  generated by the previous theorem. Consider a generating set
+  $F=\{F_1,F_2,\ldots,F_n\}$ for $I$. Then $V = \V I = \V {F_1}\cap\V
+    {F_2}\cap\cdots\cap\V{F_n}$. Each $\V{F_i}$ is the zero set of a single
+  polynomial in $\kn$, which is by definition a hypersurface.
+\end{proof}
+
+\begin{block*}Let $\pi:R\to R/I$ be the projection map from a ring onto a
+  quotient ring. Show that
+  \begin{enumerate}[label=(\alph*)]
+    \item For every ideal $J$ containing $I$, $\pi(J)$ is an ideal of $R/I$, and
+      for every ideal $J$ of $R/I$, $\pi^{-1}(J)$ is an ideal of $R$ containing
+      $J$.
+    \item If $J$ is mapped to $J'$, then $J$ is radical (resp. prime, maximal)
+      iff $J'$ is.
+    \item If $J$ is finitely generated, $\pi(J)$ is as well. Conclude that $R/I$ is
+      Noetherian if $R$ is.
+  \end{enumerate}
+\end{block*}
+  \hfill
+  \begin{enumerate}[label=(\alph*)]
+    \item 
+      \begin{proof}
+        Apply the Correspondence Theorem to $\pi$.
+      \end{proof}
+    \item 
+      \begin{proof}[Maximal ideals]\mbox{}\\* 
+        This follows trivially from the lattice
+        isomorphism theorem, in both directions.
+      \end{proof}
+      \begin{proof}[Prime ideals]\mbox{}\\*    
+        $\fr j$ prime $\implies\pi(\fr j)$ prime:\par 
+        Let $\fr j$ be a prime ideal in $R$, and $a'b' =
+        \bar{a}\bar{b} \in \pi(\fr j)$. Then there are $i_a,i_b$ in $I$ 
+        such that $a+i_a,b+i_b\in R$.\\
+        Multiply $a+i_a$ and $b+i_b$:
+        \[(a+i_a)(b+i_b) = ab + (bi_a+ai_b+i_ai_b)\]
+        Suppose $ab\in\fr j$. Then this expression is in $\fr j$, since 
+        $\fr j\supseteq I$. Since $\fr j$ is prime, wlog $a\in\fr j$, so 
+        $a+i_a$ in $\pi(\fr j)$. Hence, $\fr j$ prime implies $\pi(\fr j)$ 
+        prime.\par
+        $\pi(\fr j)$ prime $\implies \fr j$ prime:\par
+        Let $\bar a\bar b\in\pi(\fr j)$. Then $\pi^{-1}(\bar a\bar b) 
+        = ab\in\fr j$. Since $\fr j$ is prime, wlog $\bar a\in\pi(\fr j)$. 
+        Then $a=\pi^{-1}(\bar a) \in\fr j$. Hence, $\fr j$ is prime.
+      \end{proof}
+      \begin{proof}[Radical ideals]\mbox{}\\*
+        $\fr j$ radical $\implies\pi(\fr j)$ radical:\par 
+        If $\fr j$ is radical, this means that $\sqrt{\fr j}\subseteq \fr
+        j$. (The other direction holds trivially). Since $I\subseteq\fr j$,
+        we can apply $\pi$ and use the lattice iso theorem:
+        \[\pi(\sqrt{\fr j})=\sqrt{\pi(\fr j)}\subseteq\pi(\fr j),\]
+        hence $\pi(\fr j)$ is a radical ideal too.\par
+        $\pi(\fr j)$ radical $\implies\fr j$ radical:\par
+        The proof of this is just the previous one in reverse, so we omit it.
+      \end{proof}
+    \item 
+      \begin{proof}
+        Let $J$ be finitely generated by $f_1,f_2,\ldots,f_n$. Any
+        $j\in\pi(J)$ is the image (residue?) of some $k\in J$. Since there exist
+        $a_i$ such that
+        \[k=\sum a_if_i\]
+        we can apply $\pi$ to both sides of this to get
+        \[j=\pi(k)=\pi(\sum a_if_i)=\sum\pi(a_i)\pi(f_i)\]
+        so the $\pi(f_i)$ form a finite generating set for $\pi(J)$. Since every
+        ideal in $R/I$ is the homomorphic image of some ideal of $R$, all ideals
+        of the quotient ring are finitely generated.\\
+      \end{proof}
+      \noindent
+      \begin{proof}[Alternative proof]
+        We can directly show that for any
+        $\eta:R\to S$, if $R$ is Noetherian, $S':=\im R$ is as well. One way of doing this
+        is the proof given above (note that it does not use the fact that we are
+        mapping into the quotient ring anywhere!), but there is also another way,
+        using the alternative ``ascending chain condition'' definition of
+        Noetherian-ness.\par
+        Let ${\mathfrak i}_1\subseteq {\mathfrak i}_2\subseteq \cdots$ be a chain of ideals in $S'$. We
+        will show that this must stabilize, by using the fact that homomorphisms
+        preserve inclusions (i.e. basically the lattice isomorphism theorem).\par 
+        To that end, apply $\eta^{-1}$ to this chain. This gives us a chain of
+        ideals in $R$ which all contain $\ker\eta$, since $\im R\cong R/\ker
+        \eta$ and hence $\eta(\ker\eta) = (0)$ in $S'$. 
+        This chain must stabilize since $R$ is Noetherian:
+        \[\eta^{-1}({\mathfrak i}_1)\subseteq\eta^{-1}({\mathfrak i}_2)
+          \subseteq\cdots \subseteq\eta^{-1}({\mathfrak i}_n)=
+          \eta^{-1}({\mathfrak i}_{n+1})=\cdots\]
+        This chain stabilizes at the $n$th position. Apply $\eta$ to this again,
+        to get
+        \[{\mathfrak i}_1\subseteq {\mathfrak i}_2\subseteq
+          \cdots\subseteq {\mathfrak i}_n={\mathfrak i}_{n+1}=\cdots\]
+        so this chain stabilizes as well. Hence, $\im R$ is also Noetherian.
+      \end{proof}
+  \end{enumerate}
+
+\section{Irreducible components of an alg. set}
+\begin{thmsmall}
+  An algebraic set $V$ is irreducible iff $\I V$ is
+  prime.
+\end{thmsmall}
+\begin{proof}
+  Suppose $\I V$ is not prime. Then there is some $fg\in\I V$ (vanishing all
+  over $V$) for which $f\notin\I V,g\notin\I V$ (so the factors do not vanish
+  all over $\I V$). Then
+  \begin{align*}
+    V &= V\cap \V{\I{\V{fg}}}\\ 
+      &= V\cap \V{fg}\\
+      &= V\cap(\V f\cup\V g)\\
+      &= (V\cap\V f)\cup(V\cap\V g)
+  \end{align*}
+  and neither of the last two sets are equal to $V$.\par
+  In the other direction, let $V=V_1\cup V_2$. Pick some $f$ vanishing on $V_1$
+  but not all over $V_2$, and a $g$ vanishing on $V_2$ but not all over $V_1$.
+  Then $fg$ vanishes all over $V$, so $fg\in\I V$, but neither $f$ nor $g$ are
+  in $\I V$. Hence $\I V$ is not prime.
+\end{proof}
+
+\begin{thmsmall}
+  
+\end{thmsmall}
+
+\section{Algebraic subsets of the plane}
+\begin{thm}[``Weak B\'ezout's theorem'']
+  Let $f$ and $g$ be coprime polynomials in $k[x][y]$. Then $f$ and $g$ intersect
+  in finitely many points.
+\end{thm}
+\begin{proof}
+  Since $f$ and $g$ have no common factors in $k[x][y]$, they also have no
+  common factors in $F=k(x)[y]$. Since $F$ is a PID and $f$ and $g$ are coprime,
+  $(f,g)=(1)$.\par
+  From this, we can say that there exist $r,s\in F$ such that $rf+sg=1$ in $F$.
+  Then we can ``clear fractions'' by multiplying by some $d\in k[x][y]$, to get
+  $af+bg=d$.\par
+  If the point $(p,q)$ is in $\V{f,g}$, then 
+  \[a(p,q)f(p,q)+b(p,q)g(p,q)=d(p).\]
+  Now the LHS is zero at common zeros of $f$ and $g$. If $(p,q)$ is a zero, then
+  $d(p)=0$, and $d$ has finitely many zeros. Hence the set of x-coordinates is
+  finite in size. A similar argument holds for the y-coordinates (using
+  $k[x](y)$ instead), so the set of common zeros is finite as well.
+\end{proof}
+
+\begin{thm}[Classification of affine varieties]
+  Let $k$ be infinite. Then the irreducible affine subsets of $\Akn 2$ are:
+  \begin{enumerate}[label=(\alph*)]
+    \item $\Akn 2$
+    \item $\emptyset$
+    \item points
+    \item {\bfseries{irreducible plane curves}} $\V f$, where $f$ is
+  irreducible and $\V f$ is infinite.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  Let $V$ be an irreducible affine algebraic set in $\Akn 2$. Then:
+  \begin{enumerate}
+    \item {\textit {V is finite.}} Either $V$ is empty, or $V$ consists of a
+      countable collection of points $(x_i,y_i)$. For $\I V$ to be irreducible,
+      there must only be one such point.
+    \item {\textit{$\I V = (0)$.}} Then $V=\Akn 2$.
+    \item Else, $\I V$ contains some nonconstant $f$. Since $\I V$ is a prime
+      ideal (since $V$ is irreducible), some irreducible factor of $f$ is also in the ideal.
+      Hence we may assume that $f$ is irreducible as well.\par
+      We claim that $\I V = (f)$. Indeed, notice that if $G\in\I V$,
+      $g\notin(f)$, then $f$ and $g$ are coprime. ($f=gh$ is ruled out because
+      $f$ is irreducible, and $g=fh$ would imply that $g\in(f)$.) Then
+      $V\subset\V(f,g)$ is finite, and we go back to case (a).
+  \end{enumerate}
+\end{proof}
+
+\section{The Nullstellensatz}
+\begin{thm}[Weak Nullstellensatz]
+  If $I$ is a proper ideal in $\kn$, then $\V I\neq\emptyset$.
+\end{thm}
+\begin{proof}
+  Assume $I$ is maximal. (This is okay because there is some maximal ideal $J$
+  containing $I$ anyway, and $V(I)\supset V(J)$, so it works for this case.)
+  Then $L:=\kn/I$ is a field, and $k$ can be considered a subfield of $L$.\par
+  Suppose that $k=L$. Then, for each $1\leq i\leq n$, choose some $a_i\in k$
+  such that $\bar{x_i}=a_i$, i.e. $x_i-a_i\in I$. Then these generate
+  $(x_1-a_1,\ldots,x_n-a_n)$, which is maximal, hence equal to $I$. Hence $\V I
+  = {(a_1,\ldots,a_n)}\neq\emptyset$.
+\end{proof}
+Of course, this hinges on the $k$ being equal to $L$. In fact, it always is:
+\begin{thmsmall}
+  Suppose $k$ is an algebraically closed subfield of a field $L$, and there is a
+  ring homomorphism from $\kn$ onto $L$. Then $k=L$.
+\end{thmsmall}
+We prove this later. For now, we develop some results that we will need to do so.
+\begin{thm}[``The'' Nullstellensatz]
+  Let $k$ be algebraically closed, and $I$ be an ideal in $\kn$. Then $\I{\V I}
+  = \sqrt I$.
+\end{thm}
+This basically says this: if $g$ and $f_i$ are in $\kn$, and $g$ vanishes
+whenever the $f_i$ do, then there is some relation of the form
+\[G^N = a_1f_1+a_2f_2+\cdots+a_nf_n,\]
+for $a_i\in\kn$ and $N>0$.
+\begin{proof}
+  We know that $I\subset \I{\V I}$, and since $I$ is a radical ideal, that gives
+  us $\sqrt I\subset\I{\V I}$.\par
+  To prove the other inclusion, we use the acclaimed ``Rabinowitsch trick''. 
+  Suppose that $g$ is in the ideal $\I{\V{f_1,\ldots f_r}}, f_i\in\kn$. Out of
+  nowhere, we decide to set
+  \[J:=(f_1,f_2,\ldots,f_n,x_{n+1}g-1)\subset k[x_1,\ldots,x_n,x_{n+1}].\]
+  Now notice that $\V J\subset{\mathbb{A}_k^{n+1}}$ is empty. By the Weak Nullstellensatz,
+  we see that this is not a proper ideal, and hence $(1)$. This means that $1\in
+  J$, which in turn means that there is an equation
+  \[a(x_{n+1}g-1)+\sum b_if_i = 1.\]
+  where $a$ and $b$ are polynomials in $x_1,\ldots,x_n,x_{n+1}$.
+  Let $y:=1/x_{n+1}$. Multiply both sides by a high enough power of $y$ to get
+  \[y^n = a'(g-y)+\sum {b'}_if_i.\]
+  where $a'$ and $b'$ are polynomials in $x_1,\ldots,x_n,y$. 
+  Crux move: Substitute $y=g$.
+\end{proof}
+
+We now have a raft of definitions for our algebra-geometry
+dictionary:
+\begin{proof}[Corollary]
+  Let $I$ be a radical ideal. Then $\I{\V I} = \sqrt I = I$. Hence radical
+  ideals correspond to algebraic sets.
+\end{proof}
+\begin{proof}[Corollary]
+  Let $I$ be a prime ideal. Then $\V I$ is irreducible. Hence prime ideals
+  correspond to irreducible algebraic sets.
+\end{proof}
+\begin{proof}[Corollary]
+  Let $f=f_1^{i_1}f_2^{i_2}\cdots f_n^{i_n}$ be a polynomial in $\kn$. Then
+  $\I{\V f} = (f_1f_2\cdots f_r)$, and $\V f =
+  \V{f_1}\cup\V{f_2}\cup\cdots\cup\V{f_n}$ are the irreducible components of
+  $f$. Hence, irreducible polynomials correspond to irreducible hypersurfaces in
+  $\Af$.
+\end{proof}
+
+\subsection{Exercises}
+\begin{block*}
+  Let $V$ be the set of all points in $\mathbb{A}^3_{\mathbb C}$ parametrized by
+  $(t,t^2,t^3)$ where $t\in\mathbb C$. Find $\I V$ and show that $V$ is irreducible.
+\end{block*}
+\begin{proof}
+  $(z-xy)\supset \I V$ is obvious. To prove the reverse inclusion, consider any
+  point parametrized as given. Since $z=xy$ and $y=x^2$, we get
+  $z=x^3,y=x^2,x=x$, so all polynomials in $\I V$ vanish on this point.\par
+  Now, ${\mathbb C}[x,y,z]/(z-xy) = {\mathbb C}[x,y,xy] = {\mathbb C}[x,y]$,
+  which is a domain: hence $(z-xy)$ is prime, implying that $V$ is irreducible. 
+  (That might seem hand-wavy: $\overline{f(x,y,z)}\mapsto f(x,y,xy)$ gives an
+  explicit isomorphism.)
+\end{proof}
+
+\begin{block*}
+  Let $I:=(x^2+y^2,x^2-y^2)\subset\C[x,y]$. Find $\V I$ and $\dim_{\C}(\C[x,y]/I)$.
+\end{block*}
+\begin{proof}[Solution]
+  If $(x,y)\in\V I=\V{x^2+y^2}\cap\V{x^2-y^2}$, then $x^2+y^2=x^2-y^2=0$, then
+  $y^2=0\implies y=0$ and, further, $x=0$ as well. Hence $\V I = \{(0,0)\}$.\par 
+  Direct computation shows that $\C[x,y]/I$ is the set of all linear
+  combinations of $x,y$ and $xy$: hence it can be represented as
+  $\C[x,y]/(x^2,y^2)$. 
+\end{proof}
+
+\section{Modules and finiteness}
+
+\section{Integral elements}
+
+\section{Field extensions}
+\end{document}
