@@ -1,0 +1,10 @@
+#Ignore everything
+*
+
+#but not these
+!.gitignore
+!*.tex
+!*.pdf
+
+#even in subdirs
+!*/
