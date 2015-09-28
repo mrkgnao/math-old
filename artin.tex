@@ -1,0 +1,120 @@
+\documentclass[13pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newcommand{\C}{\Bbb C}
+\newcommand{\Q}{\Bbb Q}
+\newcommand{\Z}{\Bbb Z}
+\newcommand{\R}{\Bbb R}
+
+\begin{document}
+
+\section{Definitions}
+\begin{enumerate}
+\item Prove that, for $n\neq 0$, $\cos(2\pi/n)$ is algebraic.\\
+Let $z = \cos(2\pi/n)$. Then, since $e^{2\pi i/n}=z+i\sqrt{1-z^2}$,
+\[1=e^{2i\pi}=(z+i\sqrt{1-z^2})^n=p(z)+iq(z),\] where $p$ and $q$ are
+integer-coefficient polynomials. Squaring both sides, we have \[p(z)^2 - q(z)^2 -
+1 = 2i p(z)q(z),\] and finally we deduce that \[(p(z)^2 - q(z)^2 - 1)^2 +
+  2p(z)q(z) = 0.\]
+
+\item Let $\alpha = i/2$. Prove that $\Z[\alpha]$ is dense in $\C$.\\
+Taking powers of $\alpha$, we can get all $z\in\C$ for which $Re(z)$ and $Im(z)$
+are both dyadic rationals. Since the dyadic rationals are dense in $\R$,
+$\Z[\alpha]$ is dense in $\C$. 
+
+\end{enumerate}
+
+\section{Zerodivisors etc.}
+\begin{enumerate}
+\item If $a$ and $b$ are zerodivisors in a ring $R$, is $a+b$ one as well?\\
+No. Let $R=\Z/(6)$, and consider $[2]_6$ and $[3]_6$.
+\end{enumerate}
+
+\section{Nilpotents and stuff}
+\begin{enumerate}
+\item Prove that, if $x$ is nilpotent, $1+x$ is a unit.\\
+Let $x^n = 0$. Then it is easy to see that \[(1+x)(1-x+x^2-x^3
+  +\cdots+(-1)^{n-1}x^{n-1} = 1,\] as all terms but the $1$ cancel out.
+
+\item Prove that, in a ring $R$ with prime characteristic $p$, if $a$ is
+  nilpotent, then $1+a$ is unipotent.\\
+Let $a^k=0$. Choose any multiple of $p$, say $tp$, greater than $k$. Then
+\[(1+a)^{tp} = 1 + a^{tp} + \sum\binom{tp}{i}a^i.\]
+Now, $a^{tp} = a^ka^{tp-k} = 0$.
+As for the sum, well. 
+\end{enumerate}
+
+\section{Polynomial rings}
+\begin{enumerate}
+\item Prove that the multiplication in $R[x]$ is associative.\\
+\begin{align*}
+f(x)\cdot(g(x)\cdot h(x)) &= 
+             \left(\sum_{k\geq 0}f_ix^i\right)\left(\sum_{k\geq 0}x^k\left(\sum_{i+j=k}g_ih_j\right)\right)\\
+          &= \sum_{n\geq 0}x^n\left(\sum_{i+t=n}f_i\left(\sum_{j+k=t}g_jh_k\right)\right)\\
+          &= \sum_{n\geq 0}x^n\left(\sum_{i+j+k=n}f_ig_jh_k\right)\\
+          &= \sum_{n\geq 0}x^n\left(\sum_{i+j=t}f_ig_j\left(\sum_{k+t=n}h_k\right)\right)\\
+          &= \left(\sum_{k\geq 0}x^k\left(\sum_{i+j=k}f_ig_j\right)\right)\left(\sum_{k\geq 0}x^kh_k\right)\\
+          &= (f(x)\cdot g(x))\cdot h(x).
+\end{align*}
+\item What are the units in $F[[t]]$ for $F$ a field?\\
+Let $f = \sum f_ix^i$ be a formal power series with coefficients in $F$. For it
+to be a unit, there must exist some formal power series $g = \sum g_ix^i$ such
+that $fg = 1$. That is, \[fg = \sum (x_k \sum_{i+j=k}f_ig_j) = 1.\] 
+For this, we must have $f_0g_0=1$. This is possible iff $f_0$ is noninvertible,
+and the only such element in a field is $0$. So polynomials with nonzero
+constant coefficients are units in $F[[t]]$. 
+To prove the reverse inclusion, we note that 
+\[(\sum f_ix^i)(\sum g_i x^i) = (\sum h_ix^i)\text{ where } h_i = f_0g_i+f_1g_{i-1}+\cdots+f_ig_0\] and choose $g_j$s for which all $h_{\geq 1}$
+are zero. To that end, set \[g_j = -\frac 1 {f_0}(f_1g_{i-1}+f_2g_{i-2}+\cdots+f_ig_0).\] 
+Hence, the units in $F[[t]]$ are all the polynomials with nonzero constant coefficients.
+\end{enumerate}
+
+\section{Homomorphisms and ideals}
+\begin{enumerate}
+\item Prove that every nonzero ideal in the ring of Gauss integers contains a
+  nonzero integer.\\
+Ideals are closed under multiplication. Choose some $z\in I$ and multiply it by
+$\bar z$. $z\bar z$ is an integer $\in I$.
+
+\item Find generators for the kernels of the following maps:
+\begin{enumerate}
+  \item $\phi:\R[x,y]\to\R$ defined by $f\mapsto f(0,0)$.\\
+  For all $f\in\ker\phi$, $x | f$ and $y | f$, hence $\ker\phi = (x,y)$.
+
+  \item $\varphi:\R[x]\to\C$ defined by $f\mapsto f(2+i)$.
+  Obviously, $K = \ker\varphi$ contains no polynomials of degree $<2$. The
+  minimal polynomial of $(2+i)$, $f = x^2 - 4x + 5$, is quadratic and belongs to
+  $K$. Since it is monic as well, and $\R$ is a field, $K = (f)$.
+
+  \item $\eta:\Z[x]\to\R$ defined by $f\mapsto f(1+\sqrt 2)$.
+  Consider the minimal polynomial of $1+\sqrt 2$, $f = x^2 - 2x - 1$, and let
+  $g$ be any polynomial in the kernel.
+
+  \item $\sigma:\Z[x]\to\C$ defined by $x\mapsto\sqrt 2 + \sqrt 3$.
+  
+\end{enumerate}
+
+\item Let $R$ be a ring of prime characteristic $p$. Show that the Frobenius map
+  $R\to R$ defined by $x\mapsto x^p$ is a ring homomorphism.\\
+Let $x,y\in R$. Then $(x+y)^p = x^p + y^p +
+\sum_{k=1}^{p-1}\binom{p}{k}x^ky^{p-k}$. Since, for prime $p$, all $\binom p t$
+are divisible by $p$, the sum is zero in $R$, and thus we
+have \[(x+y)^p=x^p+y^p\text{ in characteristic }p.\]
+This proves that $F(a+b)=F(a)+F(b)$. By commutativity, we also have\[(xy)^p =
+  x^py^p,\] so $F(ab)=F(a)F(b)$. Finally, $F(1)=1$ is obvious.
+
+\item Let $I$ and $J$ be ideals of a ring $R$. Show that the set $I+J$ of
+  elements of the form $i+j$, where $i\in I$ and $j\in J$, is an ideal of $R$.\\
+$I+J$ is obviously the product of the subgroups $I$ and $J$ of $R^{+}$. It is
+also closed under $R$-multiplication, since if \[r(i+j) := ri + rj\] then
+$r(i+j)\in I+J$ since $I$ and $J$ are closed under $R$-multiplication. Hence
+$I+J$ is also an ideal.
+
+\item For ideals $I$ and $J$ of a ring $R$, $I\cap J$ is also an ideal.\\
+For closure under addition, choose $k,k'\in I\cap J$. Since $I$ and $J$ are
+closed under addition, $k+k' \in I$ and $k+k'\in J$, so $k+k'\in I\cap J$.\\
+Similarly, if $k\in I\cap J$, closure under $R$-multiplication for $I\cap J$
+follows from the corresponding property for $I$ and $J$. 
+
+\end{enumerate}
+\end{document}

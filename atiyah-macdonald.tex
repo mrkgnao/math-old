@@ -1,0 +1,116 @@
+\documentclass{book}
+\usepackage{amsthm,amsmath,amsfonts,amssymb,tcolorbox,enumitem}
+
+\newcommand{\I}[1]{\mathcal{I}(#1)}
+\newcommand{\V}[1]{\mathcal{V}(#1)}
+\newcommand{\kn}{k[x_1,x_2,\ldots,x_n]}
+\newcommand{\Rn}{R[x_1,x_2,\ldots,x_n]}
+\newcommand{\Af}{{\Bbb A}^n}
+\newcommand{\Ak}{{\Bbb A}_k^n}
+\newcommand{\Akn}[1]{{\Bbb A}_k^#1}
+\newcommand{\fr}[1]{\mathfrak #1}
+\newcommand{\C}{\mathbb C}
+\DeclareMathOperator{\im}{im}
+
+\theoremstyle{definition}
+\newtheorem*{lem}{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem*{thmsmall}{Theorem}
+
+\newtheoremstyle{block}
+ {\topsep}% space above
+ {\topsep}% space below
+ {}% body font
+ {}% indent
+ {\bfseries}% head font
+ {}% punctuation
+ {1em}% space between head and body
+ {(\thmnumber{#2})}
+
+\theoremstyle{block}
+\newtheorem{block}{}[section]
+\newtheorem{block*}[block]{}
+
+\newtheoremstyle{thm}
+ {\topsep}% space above
+ {\topsep}% space below
+ {}% body font
+ {0em}% indent
+ {\bfseries}% head font
+ {}% punctuation
+ {0em}% space between head and body
+ {#3. }
+
+\theoremstyle{thm}
+\newtheorem*{thm}{}
+
+\tcolorboxenvironment{block*}{
+  frame empty,
+  colback=black!15!white,
+  grow to left by=6pt,
+  grow to right by=6pt,
+  left=1.6pt,
+  right=1.6pt,
+  arc=0pt
+}
+
+\tcolorboxenvironment{thm}{
+  frame empty,
+  colback=black!15!white,
+  grow to left by=6pt,
+  grow to right by=6pt,
+  left=1.6pt,
+  right=1.6pt,
+  arc=0pt
+}
+
+\begin{document}
+
+\begin{block*}
+  Show that the localization of a ring $R$ at a prime ideal $\fr p$ is a local
+  ring. What is the maximal ideal?
+\end{block*}
+\begin{proof}[Solution]
+  I claim that the unique maximal ideal is the ideal of nonunits of $R_{\fr p}$,
+  more usually defined as
+  \[
+    \fr m = \{\frac a b : \text{some element of } \fr p \text { divides } a\}
+  \]
+  For any other ideal $\fr i$, there are two options:
+  \begin{enumerate}[label=(\alph*)]
+    \item It contains only nonunits. Then obviously $\fr i \subset \fr m$.
+    \item It contains some element that is a unit. Since ideals are closed under
+      multiplication, multiply by the inverse of the unit to get a $1$ in the
+      ideal, implying that $\fr i = (1)$.
+  \end{enumerate}
+  Hence all proper ideals are contained in $\fr m$.
+\end{proof}
+
+\chapter{Rings and ideals}
+
+\section{Nilradical and Jacobson radical}
+Define the \textit{nilradical} of a ring $R$ as \[N_R:=\sqrt{(0)_R}\]
+equivalently, $N(R)$ is the ``ideal of nilpotents''. The main use of the
+nilradical of a ring (as far as I know!) is to eliminate the problems associated
+with nilpotents by looking at $R/N_R$ instead of $R$: it seems plausible (at
+least intuitively) that this ring has none.
+
+\begin{block}
+  $N_R$ is an ideal.
+\end{block}
+\begin{proof}
+  Closure under $R$-multiplication is clear. As for additive closure, consider
+  $x,y\in N_R$, such that $x^m = y^n = 0$. We must show that $x+y$ is also a
+  nilpotent.\par
+  Consider $(x+y)^{m+n-1}$. Every term of the binomial expansion contains either
+  a power of $x^{r\geq m}$ or $y^{s\geq n}$ (else $r+s<m+n-1$), so the entire thing is zero.
+\end{proof}
+
+\begin{block}
+  $R/N_R$ has no nonzero nilpotents.
+\end{block}
+\begin{proof}
+  Suppose $\bar x$ is a nilpotent in $R/N_R$, with ${\bar x}^n=0$. Then $x^n$ is
+  a nilpotent in $R$ and is mapped to $(0)\in R/N_R$, implying that $\bar x = 0$. 
+\end{proof}
+\end{document}

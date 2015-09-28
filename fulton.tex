@@ -430,9 +430,69 @@ dictionary:
   $\C[x,y]/(x^2,y^2)$. 
 \end{proof}
 
+\begin{block*}
+  $k$ a field, $f$ a polynomial in $k[x]$ of degree $n>0$. Show that
+  $S:=\{\bar{1},\bar x,\bar{x}^2,\cdots,\bar{x}^{n-1}\}$ form a basis of $k[x]/(f)$ over $k$.
+\end{block*}
+\begin{proof}[Solution]
+  Take any polynomial $g$ in $R:=k[x]/(f)$. We construct a simple algorithm to
+  reduce high powers of $x$ in $g$ until it is a linear combination of elements
+  of $S$. Let us denote by $h$ the polynomial formed by removing the leading
+  term from $f$.\par
+  Let the leading term of $g$ be $ax^{n+t}$, $t\geq 0$. Replace it by
+  $ax^t(x^n) = ax^t(f-h)=ax^tf-ax^th=-ax^th$. Since the degree of $h$ is lower
+  than that of $f$, this operation replaces $g$ by another polynomial of lower
+  degree in the same ideal. This can be continued until the highest degree of
+  $x$ in $g$ is $n-1$, at which point we are done.\par
+  This procedure expresses any polynomial in $R$ as a finite linear combination
+  of elements of $S$, so $S$ is a basis of $R$ over $k$.
+  An example: let $k=\C$, $f=x^3+x+3$. Let us try to express $x^5+x^4+2$ in
+  terms of elements from $\{1,x,x^2\}$. This is simple: in $\C[x]/(f)$,
+  \begin{align*}
+    x^5+x^4+2 &= x^2(x^3+x+3)-x^2(x+3) + x(x^3+x+3) - x(x+3) + 2\\
+              &= - x^3 - 3x^2 - x^2 - 3x + 2\\
+              &= x + 3 - 4x^2 - 3x + 2\\
+              &= -4x^2 - 2x + 5.\\
+  \end{align*}
+\end{proof}
+
 \section{Modules and finiteness}
+
+\subsection{Exercises}
+
+\begin{block*}
+  Module-finite implies ring-finite.
+\end{block*}
+\begin{proof}[Solution]
+  Let $T = \{s_1,s_2,\ldots,s_n\}$ be the ``generating set'' for $S$ as an f.g.
+  module over $R$. Then $S = R[s_1,s_2,\ldots,s_n]$, so it is ring-finite over
+  $R$ by definition. 
+\end{proof}
+
+\begin{block*}
+  Show that $R[x]$ is ring-finite over $R$, but not module-finite.
+\end{block*}
+\begin{proof}[Solution]
+  By the definition of ring-finiteness, $S = R[x]$ is ring-finite because $R[x]
+  = R[v]$ for $v = x \in S$.\par
+  However, it is not module-finite. There is no finite ``basis'', as that would
+  have to include every power of $x$.
+\end{proof}
+
+\begin{block*}
+  For $K,L$ fields, $L$ ring-finite over $K$ implies that $L$ is an f.g.\ field
+  ext of $K$.
+\end{block*}
+\begin{proof}[Solution]
+  $L=K[v_1,v_2,\ldots,v_n]=K(v_1,v_2,\ldots,v_n)$ since $K$ is a field.
+\end{proof}
 
 \section{Integral elements}
 
 \section{Field extensions}
+
+\chapter{Affine varieties}
+
+\section{Coordinate rings}
+
 \end{document}
