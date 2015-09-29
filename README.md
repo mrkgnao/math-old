@@ -11,6 +11,10 @@ Currently, here's what I have:
   * Atiyah-Macdonald, *Introduction to Commutative Algebra*
   
     I just started The One True Commutative Algebra Book and plan to do it very slowly and thoroughly. Might take a while!
+  
+  * Milne, *Fields and Galois Theory* ([course notes](http://www.jmilne.org/math/CourseNotes/FT.pdf))
+   
+    It seems I must learn some field theory to do anything with rings (such as the fact that there is only one finite field of any prime power order, up to isomorphism). So, here goes. Haven't started yet.
 
 * Algebraic geometry
   * Fulton, *Algebraic Curves* ([legal pdf](http://www.math.lsa.umich.edu/~wfulton/CurveBook.pdf) of the book)
