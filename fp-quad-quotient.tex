@@ -89,12 +89,14 @@
             \F_p\times\F_p\]
           which gives us another isomorphism class of quotient rings.
           The first isomorphism holds because both factors are prime, and the
-          second isomorphism is given by $(\overline{x+a},\overline{x+b})\mapsto
-          (\overline x, \overline x)$.
+          second isomorphism is obtained by applying the first isomorphism
+          theorem to the map $\text{ev}_{\gamma}:\F_p[x]\to\F_p$, which is surjective
+          and has kernel $(x-\gamma)$, for $\gamma = -a$.
         \item $a = b$. Then
           \[\frac{\F_p[x]}{\langle (x+a)^2 \rangle}\cong \F_p[x]/(x^2)
           \]
-          with an explicit isomorphism given by $x+a\mapsto x$.
+          with an explicit isomorphism given by $\overline{f(x)}\mapsto
+          \overline{f(x-a)}$. 
       \end{enumerate}
   \end{enumerate}
 \end{proof}
